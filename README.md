@@ -99,3 +99,5 @@ Acesse a documentação interativa da API em:
 
 
 ```
+
+![WebAPI-ASPNet8](https://github.com/pierrialexandervidmar/WebAPI-ASPNet8/blob/main/WebApi8-Video/Controllers/image.png)
