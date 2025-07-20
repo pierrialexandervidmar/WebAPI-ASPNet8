@@ -20,6 +20,7 @@ namespace WebApi8_Video.Controllers
         }
 
         [HttpGet("ListarAutores")]
+        [Produces("application/json")]
         public async Task<ActionResult<ResponseModel<List<AutorModel>>>> ListarAutores()
         {
             var autores = await _autorInterface.ListarAutores();
@@ -27,6 +28,7 @@ namespace WebApi8_Video.Controllers
         }
 
         [HttpGet("BuscarAutorPorId/{id}")]
+        [Produces("application/json")]
         public async Task<ActionResult<ResponseModel<AutorModel>>> BuscarAutorPorId(int id)
         {
             var autor = await _autorInterface.BuscarAutorPorId(id);
@@ -34,6 +36,7 @@ namespace WebApi8_Video.Controllers
         }
 
         [HttpGet("BuscarAutorPorIdLivro/{idLivro}")]
+        [Produces("application/json")]
         public async Task<ActionResult<ResponseModel<AutorModel>>> BuscarAutorPorIdLivro(int idLivro)
         { 
             var autor = await _autorInterface.BuscarAutorPorIdLivro(idLivro);
@@ -41,6 +44,7 @@ namespace WebApi8_Video.Controllers
         }
 
         [HttpPost("CriarAutor")]
+        [Consumes("application/json")]
         public async Task<ActionResult<ResponseModel<AutorModel>>> CriarAutor(AutorCriacaoDto autorCriacaoDto)
         {
             var autor = await _autorInterface.CriarAutor(autorCriacaoDto);
@@ -53,6 +57,7 @@ namespace WebApi8_Video.Controllers
         }
 
         [HttpPut("EditarAutor/{idAutor}")]
+        [Consumes("application/json")]
         public async Task<ActionResult<ResponseModel<AutorModel>>> EditarAutor(AutorEdicaoDto autorEdicaoDto, int idAutor)
         {
             var autor = await _autorInterface.EditarAutor(autorEdicaoDto, idAutor);
