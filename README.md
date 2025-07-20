@@ -98,6 +98,8 @@ Acesse a documentação interativa da API em:
    ```
 
 
-```
+<p align="center">
+  <img src="https://raw.githubusercontent.com/pierrialexandervidmar/WebAPI-ASPNet8/main/WebAPI-ASPNet8/Controllers/image.png" alt="WebAPI-ASPNet8" />
+</p>
 
-![WebAPI-ASPNet8](https://github.com/pierrialexandervidmar/WebAPI-ASPNet8/blob/main/WebApi8-Video/Controllers/image.png)
+```
