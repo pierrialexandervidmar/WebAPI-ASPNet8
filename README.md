@@ -70,7 +70,12 @@ Acesse a documentação interativa da API em:
 
 [https://localhost:{porta}/swagger](https://localhost:{porta}/swagger)
 
-````
+```
+```html
+<p align="center">
+  <img src="https://github.com/pierrialexandervidmar/WebAPI-ASPNet8/blob/main/WebAPI-ASPNet8/Controllers/image.png?raw=true" alt="WebAPI-ASPNet8" />
+</p>
+```
 
 ## 🛠️ Como Executar o Projeto
 
@@ -98,8 +103,6 @@ Acesse a documentação interativa da API em:
    ```
 
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/pierrialexandervidmar/WebAPI-ASPNet8/main/WebAPI-ASPNet8/Controllers/image.png" alt="WebAPI-ASPNet8" />
-</p>
 
-```
+
+
