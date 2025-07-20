@@ -1,0 +1,70 @@
+## ASP.NET / .NET / C# (.gitignore oficial da Microsoft + ajustes práticos)
+
+# Build Results
+bin/
+obj/
+[Ll]og/
+*.log
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Visual Studio
+.vs/
+.vscode/
+
+# JetBrains Rider
+.idea/
+
+# OS-generated
+.DS_Store
+Thumbs.db
+
+# ASP.NET Publish directory
+publish/
+wwwroot/lib/
+
+# Packages
+*.nupkg
+*.snupkg
+*.symbols.nupkg
+packages/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# EF Core Migrations Snapshots
+*Migrations/*.Designer.cs
+*Migrations/*ModelSnapshot.cs
+
+# Optional: test results, coverage
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
+*.testresults
+
+# Secrets
+secrets.json
+appsettings.Development.json
+appsettings.Local.json
+
+# Others
+*.db
+*.sqlite
+*.bak
+*.cache
+*.pid
+
+# Docker
+*.tar
+docker-compose.override.yml
+
+# Node.js (se usar com front integrado)
+node_modules/
+npm-debug.log
+yarn-error.log
+.env
