@@ -10,7 +10,7 @@ namespace WebApi8_Video.Services.Livro
         Task<ResponseModel<LivroRespostaDto>> BuscarLivroPorId(int idLivro);
         Task<ResponseModel<List<LivroModel>>> BuscarLivroPorIdAutor(int idAutor);
         Task<ResponseModel<LivroRespostaDto>> CriarLivro(LivroCriacaoDto livroCriacaoDto);
-        Task<ResponseModel<LivroModel>> EditarLivro(LivroEdicaoDto livroEdicaoDto);
+        Task<ResponseModel<LivroRespostaDto>> EditarLivro(LivroEdicaoDto livroEdicaoDto, int idLivro);
         Task<bool> ExcluirLivro(int idLivro);
     }
 }

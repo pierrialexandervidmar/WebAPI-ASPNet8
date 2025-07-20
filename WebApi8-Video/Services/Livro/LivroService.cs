@@ -127,14 +127,81 @@ namespace WebApi8_Video.Services.Livro
             }
         }
 
-        public Task<ResponseModel<LivroModel>> EditarLivro(LivroEdicaoDto LivroEdicaoDto)
+        public async Task<ResponseModel<LivroRespostaDto>> EditarLivro(LivroEdicaoDto livroEdicaoDto, int idLivro)
         {
-            throw new NotImplementedException();
+            ResponseModel<LivroRespostaDto> resposta = new ResponseModel<LivroRespostaDto>();
+
+            try
+            {
+                var livro = await _context.Livros.FirstOrDefaultAsync(l => l.Id == idLivro);
+
+                if (livro == null)
+                {
+                    resposta.Mensagem = "Não existe esse livro, bixo!";
+                    resposta.Status = false;
+                    return resposta;
+                }
+
+                // Verifica se o autor informado existe
+                var autor = await _context.Autores.FirstOrDefaultAsync(a => a.Id == livroEdicaoDto.AutorId);
+                if (autor == null)
+                {
+                    resposta.Mensagem = "Autor informado não existe!";
+                    resposta.Status = false;
+                    return resposta;
+                }
+
+                // Atualiza os dados do livro
+                livro.Titulo = livroEdicaoDto.Titulo;
+                livro.AutorId = livroEdicaoDto.AutorId;
+
+                _context.Update(livro);
+                await _context.SaveChangesAsync();
+
+                // Monta o DTO de resposta
+                var livroResposta = new LivroRespostaDto
+                {
+                    Id = livro.Id,
+                    Titulo = livro.Titulo,
+                    AutorId = autor.Id
+                };
+
+                resposta.Dados = livroResposta;
+                resposta.Mensagem = "Livro atualizado com sucesso!";
+                resposta.Status = true;
+
+                return resposta;
+            } catch (Exception ex)
+            {
+                resposta.Mensagem = ex.Message;
+                resposta.Status = false;
+                return resposta;
+            }
         }
 
-        public Task<bool> ExcluirLivro(int idLivro)
+
+        public async Task<bool> ExcluirLivro(int idLivro)
         {
-            throw new NotImplementedException();
+            ResponseModel<LivroModel> resposta = new ResponseModel<LivroModel>();
+
+            try
+            {
+                var livro = await _context.Livros.FindAsync(idLivro);
+
+                if (livro == null)
+                    return false;
+
+                _context.Remove(livro);
+                await _context.SaveChangesAsync();
+
+                return true;
+
+            } catch (Exception ex)
+            {
+                resposta.Mensagem = ex.Message;
+                resposta.Status = false;
+                return false;
+            }
         }
 
         public async Task<ResponseModel<List<LivroModel>>> ListarLivros()

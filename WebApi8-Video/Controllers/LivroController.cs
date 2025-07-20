@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using WebApi8_Video.Dto.Livro;
 using WebApi8_Video.Models;
-using WebApi8_Video.Services.Autor;
 using WebApi8_Video.Services.Livro;
 
 namespace WebApi8_Video.Controllers
@@ -18,7 +17,11 @@ namespace WebApi8_Video.Controllers
             _livroInterface = livroInterface;
         }
 
-        [HttpGet("ListarLIvros")]
+        /// <summary>
+        /// Retorna todos os livros cadastrados.
+        /// </summary>
+        /// <returns>Lista de livros</returns>
+        [HttpGet("ListarLivros")]
         [Produces("application/json")]
         public async Task<ActionResult<ResponseModel<List<LivroModel>>>> ListarLivros()
         {
@@ -27,10 +30,10 @@ namespace WebApi8_Video.Controllers
         }
 
         /// <summary>
-        /// Retorna um livro pelo ID.
+        /// Retorna os dados de um livro específico pelo ID.
         /// </summary>
-        /// <param name="idLivro">ID do livro</param>
-        /// <returns>Livro encontrado ou 404</returns>
+        /// <param name="idLivro">ID do livro a ser consultado</param>
+        /// <returns>Livro encontrado ou mensagem de erro</returns>
         [HttpGet("BuscarLivroPorId/{idLivro}")]
         [Produces("application/json")]
         public async Task<ActionResult<ResponseModel<LivroRespostaDto>>> BuscarLivroPorId(int idLivro)
@@ -39,6 +42,11 @@ namespace WebApi8_Video.Controllers
             return Ok(resposta);
         }
 
+        /// <summary>
+        /// Retorna todos os livros de um autor específico.
+        /// </summary>
+        /// <param name="idAutor">ID do autor</param>
+        /// <returns>Lista de livros vinculados ao autor</returns>
         [HttpGet("BuscarLivroPorIdAutor/{idAutor}")]
         [Produces("application/json")]
         public async Task<ActionResult<ResponseModel<LivroModel>>> BuscarLivroPorIdAutor(int idAutor)
@@ -47,6 +55,11 @@ namespace WebApi8_Video.Controllers
             return Ok(autor);
         }
 
+        /// <summary>
+        /// Cria um novo livro no sistema.
+        /// </summary>
+        /// <param name="livroCriacaoDto">Dados para criação do livro</param>
+        /// <returns>Livro criado com status 201</returns>
         [HttpPost("CriarLivro/")]
         [Consumes("application/json")]
         public async Task<ActionResult<ResponseModel<LivroRespostaDto>>> CriarLivro(LivroCriacaoDto livroCriacaoDto)
@@ -60,5 +73,41 @@ namespace WebApi8_Video.Controllers
             );
         }
 
+        /// <summary>
+        /// Atualiza os dados de um livro existente.
+        /// </summary>
+        /// <param name="livroEdicaoDto">Dados atualizados do livro</param>
+        /// <param name="idLivro">ID do livro a ser editado</param>
+        /// <returns>Livro atualizado ou erro</returns>
+        [HttpPut("EditarLivro/{idLivro}")]
+        [Consumes("application/json")]
+        [Produces("application/json")]
+        public async Task<ActionResult<ResponseModel<LivroRespostaDto>>> EditarLivro(LivroEdicaoDto livroEdicaoDto, int idLivro)
+        {
+            var livro = await _livroInterface.EditarLivro(livroEdicaoDto, idLivro);
+            return Ok(livro);
+        }
+
+        /// <summary>
+        /// Exclui um livro do sistema.
+        /// </summary>
+        /// <param name="idLivro">ID do livro a ser excluído</param>
+        /// <returns>Status 204 se excluído, 404 se não encontrado</returns>
+        [HttpDelete("ExcluirLivro/{idLivro}")]
+        public async Task<IActionResult> ExcluirLivro(int idLivro)
+        {
+            var livro = await _livroInterface.ExcluirLivro(idLivro);
+
+            if (!livro)
+            {
+                return NotFound(new
+                {
+                    status = false,
+                    mensagem = "Livro não encontrado."
+                });
+            }
+
+            return NoContent();
+        }
     }
 }
